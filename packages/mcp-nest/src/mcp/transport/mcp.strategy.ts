@@ -871,6 +871,9 @@ export class McpStrategy extends Server implements CustomTransportStrategy {
           tool.metadata.parameters,
         ).validate(request.params.arguments ?? {});
         if (!validation.success) {
+          this.logger.warn(
+            `Tool "${request.params.name}" validation failed: ${validation.message}`,
+          );
           return {
             content: [
               {
